@@ -1,15 +1,9 @@
 import fastify from 'fastify';
-import { PrismaClient } from "@prisma/client";
-import { email } from 'zod';
-
+import { Register } from './http/controllers/register.controller';
+import { appRoutes } from './http/routes';
 
 
 export const app = fastify();
 
-const prisma = new PrismaClient();
-prisma.user.create({
-  data: {
-    name: 'John Doe',
-    email: 'john.doe@example.com'
-  }
-})
+
+app.register(appRoutes)
