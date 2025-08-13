@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
+import { PrismaUserRepository } from "@/repositories/prisma-users-repository";
 import { hash } from "bcryptjs";
-import { FastifyRequest, FastifyReply } from "fastify"
  
 
 
@@ -28,19 +28,13 @@ export async function registerUseCase({
       throw new Error('User with this email already exists')
     }
   
-  
-    const user = await prisma.user.create({
-      data: {
+    const prismaUserRepository = new PrismaUserRepository()
+
+    await prismaUserRepository.create({
         name,
         email,
-        password_hash, // troque para password_hash quando hashear
-      },
-      select: {
-        id: true,
-        name: true,
-        email: true,
-      },
+        password_hash
     })
+    
   
-    return { user }
 }
