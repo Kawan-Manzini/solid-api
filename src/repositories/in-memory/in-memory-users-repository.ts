@@ -1,8 +1,8 @@
 import { Prisma, User } from "@prisma/client";
-import { UsersRepository } from "../users-repository";
+import { IUsersRepository } from "../users-repository";
 
 // https://martinfowler.com/bliki/InMemoryTestDatabase.html
-export class InMemoryUsersRepository implements UsersRepository {
+export class InMemoryUsersRepository implements IUsersRepository {
 
   public items: User[] = []
 

@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { PrismaUserRepository } from "@/repositories/prisma/prisma-users-repository";
-import type { UsersRepository } from "@/repositories/users-repository";
+import type { IUsersRepository } from "@/repositories/users-repository";
 import type { User } from "@prisma/client";
 import { hash } from "bcryptjs";
 
@@ -26,7 +26,7 @@ export class RegisterUseCase {
    *
    */
   constructor(
-    private _usersRepository: UsersRepository
+    private _usersRepository: IUsersRepository
   ) { }
   async execute({
     name,

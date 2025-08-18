@@ -1,14 +1,11 @@
-import { PrismaUserRepository } from '@/repositories/prisma/prisma-users-repository'
-import { describe } from 'node:test'
-import { expect, it, test } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import { RegisterUseCase } from '../register'
-import { compare } from 'bcryptjs'
 import { InMemoryUsersRepository } from '@/repositories/in-memory/in-memory-users-repository'
-import { USerAlreadyExistsError } from './user-already-exists-error'
+import { USerAlreadyExistsError } from '../../use-cases/errors/user-already-exists-error'
 
 //Unit Testing
 
-describe('Register useCase', () => {
+describe('Register Use Case', () => {
   it('should to register ', async () => {
 
     const usersRepository = new InMemoryUsersRepository()
@@ -21,7 +18,7 @@ describe('Register useCase', () => {
       password: '123456'
     })
 
-   expect(user.id).toEqual(expect.any(String))
+  await expect(user.id).toEqual(expect.any(String))
   })
 
    it('should not be able to register with same email twice', async () => {
@@ -36,7 +33,7 @@ describe('Register useCase', () => {
       password: '123456',
     })
 
-    expect(() =>
+   await expect(() =>
       registerUseCase.execute({
         name: 'John Doe',
         email,

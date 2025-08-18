@@ -34,6 +34,6 @@ export async function Register(request: FastifyRequest, reply: FastifyReply) {
       throw error//TODO: fix
     }
 
-    return reply.status(200).send();
+    return reply.status(201).send();
   }
 

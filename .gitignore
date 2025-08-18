@@ -1,5 +1,6 @@
 README.md
 node_modules
+coverage
 dist
 .env
 /generated/prisma
