@@ -3,13 +3,24 @@ import { IUsersRepository } from "../users-repository";
 
 // https://martinfowler.com/bliki/InMemoryTestDatabase.html
 export class InMemoryUsersRepository implements IUsersRepository {
-
   public items: User[] = []
+
+
+  async findById(id: string): Promise<User | null> {
+    const user = this.items.find((item) => item.id === id)
+
+    if (!user) {
+      return null
+    }
+
+    return user
+  }
+
 
   async findByEmail(email: string): Promise<User | null> {
     const user = this.items.find((item) => item.email === email)
 
-    if(!user){
+    if (!user) {
       return null
     }
 
