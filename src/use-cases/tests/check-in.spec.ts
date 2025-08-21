@@ -80,4 +80,25 @@ describe("Check-In Use Case", () => {
 
     expect(checkIn.id).toEqual(expect.any(String));
   });
+  it("should not be able to check in on distant gym", async () => {
+    gymsRepository.items.push({
+      id: "gym-2",
+      title: ".Net Gym",
+      description: "",
+      phone: "",
+      latitude: -23.522269,
+      longitude: -46.408146,
+    });
+    //-23.522215, -46.408170
+
+    //-23.5202489,-46.4116854
+    expect(
+      sut.execute({
+        gymId: "gym-2",
+        userId: "user-1",
+        userLatitude: -23.5202489,
+        userLongitude: -46.4116854,
+      })
+    ).rejects.toBeInstanceOf(Error);
+  });
 });
