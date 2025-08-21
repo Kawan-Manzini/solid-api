@@ -16,11 +16,7 @@
     "sourceType": "module",
     "project": "./tsconfig.json"
   },
-  "plugins": [
-    "@typescript-eslint",
-    "prettier",
-    "import"
-  ],
+  "plugins": ["@typescript-eslint", "prettier", "import"],
   "rules": {
     "camelcase": "off",
     "no-useless-constructor": "off",
@@ -37,20 +33,23 @@
     "import/order": [
       "error",
       {
-        "groups": ["builtin", "external", "internal", ["parent", "sibling", "index"]],
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          ["parent", "sibling", "index"]
+        ],
         "alphabetize": { "order": "asc", "caseInsensitive": true },
         "newlines-between": "always"
       }
     ],
     "no-console": ["warn", { "allow": ["warn", "error"] }],
-    "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      { "argsIgnorePattern": "^_" }
+    ],
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-explicit-any": "warn"
   },
-  "ignorePatterns": [
-    "node_modules",
-    "dist",
-    "build",
-    "coverage"
-  ]
+  "ignorePatterns": ["node_modules", "dist", "build", "coverage"]
 }
