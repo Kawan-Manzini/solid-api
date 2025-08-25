@@ -1,20 +1,18 @@
-import type { IUsersRepository } from "@/repositories/users-repository";
-import { InvalidCredencialsError } from "./errors/invalid-credencials-error";
-import { compare } from "bcryptjs";
-import type { User } from "@prisma/client";
-import { ResourceNotFoundError } from "./errors/resource-not-found-error";
+import type { User } from '@prisma/client'
+
+import { ResourceNotFoundError } from './errors/resource-not-found-error'
+
+import type { IUsersRepository } from '@/repositories/users-repository'
 
 interface GetUserProfileUseCaseRequest {
- userId: string
+  userId: string
 }
 interface GetUserProfileUseCaseResponse {
   user: User
 }
 
 export class GetUserProfileUseCase {
-  constructor(
-    private userRepository: IUsersRepository
-  ) {}
+  constructor(private userRepository: IUsersRepository) {}
 
   async execute({ userId }: GetUserProfileUseCaseRequest): Promise<GetUserProfileUseCaseResponse> {
     const user = await this.userRepository.findById(userId)

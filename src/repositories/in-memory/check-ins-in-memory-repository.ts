@@ -1,11 +1,17 @@
-import { Prisma, CheckIn } from "@prisma/client";
-import { ICheckInsRepository } from "../check-ins-repository";
-import { randomUUID } from "node:crypto";
-import dayjs from "dayjs";
+import { randomUUID } from 'node:crypto'
+
+import { Prisma, CheckIn } from '@prisma/client'
+import dayjs from 'dayjs'
+
+import { ICheckInsRepository } from '../check-ins-repository'
 
 // https://martinfowler.com/bliki/InMemoryTestDatabase.html
 export class InMemoryCheckInRepository implements ICheckInsRepository {
   public items: CheckIn[] = []
+
+  async findManyByUserId(userId: string, page: number) {
+    return this.items.filter((item) => item.user_Id === userId).slice((page - 1) * 20, page * 20)
+  }
 
   async findByUserIdOnDate(userId: string, date: Date) {
     const startOfTheDay = dayjs(date).startOf('date')
@@ -28,7 +34,7 @@ export class InMemoryCheckInRepository implements ICheckInsRepository {
       user_Id: data.user_Id,
       gym_Id: data.gym_Id,
       validated_at: data.validated_at ? new Date(data.validated_at) : null,
-      created_at: new Date()
+      created_at: new Date(),
     }
     this.items.push(checkIn)
 
