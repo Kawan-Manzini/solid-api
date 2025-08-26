@@ -9,6 +9,10 @@ import { ICheckInsRepository } from '../check-ins-repository'
 export class InMemoryCheckInRepository implements ICheckInsRepository {
   public items: CheckIn[] = []
 
+  async countByUserId(userId: string) {
+    return this.items.filter((item) => item.user_Id === userId).length
+  }
+
   async findManyByUserId(userId: string, page: number) {
     return this.items.filter((item) => item.user_Id === userId).slice((page - 1) * 20, page * 20)
   }
