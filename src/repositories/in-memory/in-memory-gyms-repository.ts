@@ -1,10 +1,16 @@
-import { Prisma, Gym } from "@prisma/client";
-import { IGymsRepository } from "../gyms-repository";
-import { randomUUID } from "node:crypto";
+import { randomUUID } from 'node:crypto'
+
+import { Prisma, Gym } from '@prisma/client'
+
+import { IGymsRepository } from '../gyms-repository'
 
 // https://martinfowler.com/bliki/InMemoryTestDatabase.html
 export class InMemoryGymsRepository implements IGymsRepository {
-  public items: Gym[] = [];
+  public items: Gym[] = []
+
+  async searchMany(query: string, page: number) {
+    return this.items.filter((item) => item.title.includes(query)).slice((page - 1) * 20, page * 20)
+  }
 
   async create(data: Prisma.GymCreateInput) {
     const gym = {
@@ -16,20 +22,20 @@ export class InMemoryGymsRepository implements IGymsRepository {
       longitude: data.longitude ?? null,
       created_at: new Date(),
       updated_at: new Date(),
-    };
+    }
 
-    this.items.push(gym);
+    this.items.push(gym)
 
-    return gym;
+    return gym
   }
 
   async findById(id: string) {
-    const gym = this.items.find((item) => item.id === id);
+    const gym = this.items.find((item) => item.id === id)
 
     if (!gym) {
-      return null;
+      return null
     }
 
-    return gym;
+    return gym
   }
 }
