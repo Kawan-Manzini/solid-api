@@ -1,37 +1,34 @@
-import { prisma } from "@/lib/prisma";
-import { PrismaUserRepository } from "@/repositories/prisma/prisma-users-repository";
-import type { IUsersRepository } from "@/repositories/users-repository";
-import type { User } from "@prisma/client";
-import { hash } from "bcryptjs";
+import type { User } from '@prisma/client'
+import { hash } from 'bcryptjs'
 
-
-
+import { prisma } from '@/lib/prisma'
+import { PrismaUserRepository } from '@/repositories/prisma/prisma-users-repository'
+import type { IUsersRepository } from '@/repositories/users-repository'
 
 interface RegisterUseCaseRequest {
-  name: string;
-  email: string;
-  password: string;
+  name: string
+  email: string
+  password: string
 }
 
-interface RegisterUseCaseResponse{
-  user: User;
+interface RegisterUseCaseResponse {
+  user: User
 }
 
-//SOLID
+// SOLID
 
-//D - Dependency Inversion Principle
+// D - Dependency Inversion Principle
 
 export class RegisterUseCase {
   /**
    *
    */
-  constructor(
-    private _usersRepository: IUsersRepository
-  ) { }
+  constructor(private _usersRepository: IUsersRepository) {}
+
   async execute({
     name,
     email,
-    password
+    password,
   }: RegisterUseCaseRequest): Promise<RegisterUseCaseResponse> {
     const password_hash = await hash(password, 6)
 
@@ -44,11 +41,9 @@ export class RegisterUseCase {
     const user = await this._usersRepository.create({
       name,
       email,
-      password_hash
+      password_hash,
     })
 
-    return {user}
+    return { user }
   }
-
 }
-
