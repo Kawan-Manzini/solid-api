@@ -1,14 +1,14 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 
 import { FetchUsersCheckinHistoryUseCase } from '../fetch-user-check-ins-history'
-import { getUserMetricsUseCase } from '../get-user-metrics'
+import { GetUserMetricsUseCase } from '../get-user-metrics'
 
 import { InMemoryCheckInRepository } from '@/repositories/in-memory/check-ins-in-memory-repository'
 
 // Unit Testing
 
 let checkInsRepository: InMemoryCheckInRepository
-let sut: getUserMetricsUseCase
+let sut: GetUserMetricsUseCase
 describe('Get User Metrics Use Case', () => {
   beforeEach(() => {
     checkInsRepository = new InMemoryCheckInRepository()

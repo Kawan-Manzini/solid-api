@@ -1,5 +1,4 @@
 import { AuthenticateUseCase } from '../authenticate'
-import { RegisterUseCase } from '../register'
 
 import { PrismaUserRepository } from '@/repositories/prisma/prisma-users-repository'
 
