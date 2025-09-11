@@ -1,4 +1,4 @@
-export class USerAlreadyExistsError extends Error {
+export class UserAlreadyExistsError extends Error {
   /**
    *
    */
